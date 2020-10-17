@@ -144,8 +144,9 @@ class Parser:
             raise PywavefrontException("Unimplemented OBJ format statement '%s' on line '%s'"
                                        % (self.values[0], self.line.rstrip()))
         else:
-            logger.warning("Unimplemented OBJ format statement '%s' on line '%s'"
-                            % (self.values[0], self.line.rstrip()))
+            # logger.warning("Unimplemented OBJ format statement '%s' on line '%s'"
+            #                % (self.values[0], self.line.rstrip()))
+            pass
 
     def _build_dispatch_map(self):
         """
