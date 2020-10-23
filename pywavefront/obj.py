@@ -51,7 +51,8 @@ class ObjParser(Parser):
     cache_writer_cls = CacheWriter
 
     def __init__(self, wavefront, file_name, strict=False, encoding="utf-8",
-                 create_materials=False, collect_faces=False, parse=True, cache=False):
+                 create_materials=False, collect_faces=False, parse=True, cache=False,
+                 warn_material=True):
         """
         Create a new obj parser
         :param wavefront: The wavefront object
@@ -71,6 +72,7 @@ class ObjParser(Parser):
         self.collect_faces = collect_faces
         self.cache = cache
         self.cache_loaded = None
+        self.warn_material = warn_material
 
         # Stores normals and texcoords for the entire file
         self.normals = []
@@ -362,11 +364,12 @@ class ObjParser(Parser):
         # If the material already have vertex data, ensure the same format is used
         if self.material.vertex_format and self.material.vertex_format != vertex_format:
             # raise ValueError((
-            logger.warn(
-                "Trying to merge vertex data with different format: {}. "
-                "Material {} has vertex format {}"
-                .format(vertex_format, self.material.name, self.material.vertex_format)
-            )
+            if self.warn_material:
+                logger.warn(
+                    "Trying to merge vertex data with different format: {}. "
+                    "Material {} has vertex format {}"
+                    .format(vertex_format, self.material.name, self.material.vertex_format)
+                )
 
         self.material.vertex_format = vertex_format
 

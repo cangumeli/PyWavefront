@@ -53,6 +53,7 @@ class Wavefront:
         collect_faces=False,
         parse=True,
         cache=False,
+        warn_material=True
     ):
         """
         Create a Wavefront instance
@@ -77,7 +78,9 @@ class Wavefront:
             create_materials=create_materials,
             collect_faces=collect_faces,
             parse=parse,
-            cache=cache)
+            cache=cache,
+            warn_material=warn_material
+        )
 
     def parse(self):
         """Manually call the parser. This is used when parse=False"""
