@@ -361,10 +361,12 @@ class ObjParser(Parser):
 
         # If the material already have vertex data, ensure the same format is used
         if self.material.vertex_format and self.material.vertex_format != vertex_format:
-            raise ValueError((
+            # raise ValueError((
+            logger.warn(
                 "Trying to merge vertex data with different format: {}. "
                 "Material {} has vertex format {}"
-            ).format(vertex_format, self.material.name, self.material.vertex_format))
+                .format(vertex_format, self.material.name, self.material.vertex_format)
+            )
 
         self.material.vertex_format = vertex_format
 
